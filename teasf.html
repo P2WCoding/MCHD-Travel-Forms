@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCHD Travel Expense Account Settlement Form</title>
+    <link rel="stylesheet" href="teasf.css">
+    <script src="script.js" "https://cdn.tailwindcss.com" defer></script>
+    <style>
+		.relative-top-right { position: relative; top: 1rem; right: 1rem; }
+		
+        .modal { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            right: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0, 0, 0, 0.5); 
+            align-items: center; 
+            justify-content: center; 
+            z-index: 1000; /* Ensure the modal appears on top */
+        }
+        
+        .modal-content { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 8px; 
+            width: 90%; 
+            max-width: 1200px; 
+            max-height: 80%;  /* Limit height */
+            overflow-y: auto;  /* Enable vertical scrolling */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+		<div class="form-container">
+			<div id="instructionsModal" class="modal">
+			<div class="modal-content">
+				<h1 class="text-center font-bold text-xl mb-4">Instructions for Completing the Travel Authorization Form</h1>
+				<div class="container bordered p-8 bg-white rounded-lg shadow-lg">
+<!-- Traveler Instructions -->
+					<h2 class="text-lg mt-4">Traveler Instructions:</h2>
+					<p class="text-gray-700 mb-2">
+						Complete all applicable sections of this form based on actual travel expenses and forward it to your supervisor for approval. Attach all supporting documents.
+					</p>
+
+<!-- Supervisor Instructions -->
+					<h2 class="text-lg mt-4">Supervisor Instructions:</h2>
+					<p class="text-gray-700 mb-2">
+						Review and approve the completed form, then submit it to the Business Office within 30 days of the last day of travel.
+					</p>
+				</div>
+				<div class="mt-8 flex justify-center">
+					<button onclick="closeModal()" class="bg-red-500 text-white py-2 px-4 rounded">Close</button>
+				</div>
+			</div>  
+		</div>
+
+        <form>
+<!-- Name and Mileage Rate Fields -->
+			<div class="totals-section">
+				<div class="totals-item">Name: <input type="text" placeholder="Enter Name" required></div>
+				<div class="totals-item">Mileage Rate: <input type="number" id="mileageRate" value="0.00" required></div>
+				<button onclick="showModal()" class="instructions-button new-instructions-position">
+				Instructions
+				</button>
+			</div>
+
+<!-- Table of Expenses -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date of Travel</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Miles</th>
+                        <th>Mileage Amount</th>
+                        <th>B</th>
+                        <th>L</th>
+                        <th>D</th>
+                        <th>I</th>
+                        <th>Other</th>
+                        <th>Total Per Day</th>
+                    </tr>
+                </thead>
+                <tbody id="expenseTableBody">
+                    <tr>
+                        <td><input type="date" required></td>
+						<td><textarea rows="1" oninput="autoResizeTextArea(this)" required></textarea></td>
+						<td><textarea rows="1" oninput="autoResizeTextArea(this)" required></textarea></td>
+						<td><input type="number" value="0" oninput="calculateMileageAmount(this)" required></td>
+						<td><span class="mileageAmount">$0.00</span></td>
+						<td><input type="number" class="perDiem" value="0" oninput="calculatePerDiem(this.closest('tr'))"></td>
+						<td><input type="number" class="perDiem" value="0" oninput="calculatePerDiem(this.closest('tr'))"></td>
+						<td><input type="number" class="perDiem" value="0" oninput="calculatePerDiem(this.closest('tr'))"></td>
+						<td><input type="number" class="perDiem" value="0" oninput="calculatePerDiem(this.closest('tr'))"></td>
+						<td><input type="number" class="perDiem" value="0" oninput="calculatePerDiem(this.closest('tr'))"></td>
+						<td><span class="totalPerDay">$0.00</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="button-group">
+                <button type="button" class="add-day" onclick="addDay()">Add Day</button>
+                <button type="button" class="remove-day" onclick="removeDay()">Remove Day</button>
+            </div>
+
+			<div class="totals-section">
+				<div class="totals-item">Total Mileage: <span id="totalMileage">$0.00</span></div>
+				<div class="totals-item">Total Per Day: <span id="totalPerDay">$0.00</span></div>
+				<div class="totals-item">Total Due Employee: <span id="totalDueEmployee">$0.00</span></div>
+			</div>			
+<!-- Signature Section -->
+            <div class="totals-section">
+				<div class="totals-item">Employee Signature: <input type="text" required></div>
+				<div class="totals-item">Date: <input type="date" required></div>
+			</div>
+
+			<div class="button-group bottom-button-group">
+				<button onclick="printForm()" class="print-button">Print Form</button>
+			</div>
+		</form>
+	</div>	
+	<script>
+    </script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCHD Travel Authorization Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .bordered { border: 1px solid black; }
+        .relative { position: relative; }
+        .absolute-top-right { position: absolute; top: 1rem; right: 1rem; }
+        .modal { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0, 0, 0, 0.5); 
+            align-items: center; 
+            justify-content: center; 
+        }
+        .modal-content { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 8px; 
+            width: 90%; 
+            max-width: 600px; 
+            max-height: 80%; 
+            overflow-y: auto; 
+        }
+        body {
+            background-color: #009b22;
+        }
+    </style>
+</head>
+<body class="p-8" style="background-color: #009b22;">
+
+    <div class="bordered p-8 bg-sky-100 rounded-lg shadow-lg relative">
+        <!-- Instructions Button to trigger modal -->
+        <button onclick="showModal()" class="bg-blue-500 text-white py-2 px-4 rounded absolute-top-right">
+            Instructions
+        </button>
+
+        <h1 class="text-center font-bold text-xl mb-4">Travel Authorization Form</h1>
+	
+        <!-- SECTION 1: REQUESTED TRAVEL DETAILS -->
+        <h2 class="font-bold mt-4 text-lg">REQUESTED TRAVEL DETAILS</h2>
+        <div class="bordered p-4 rounded-md bg-gray-400">
+            <div class="grid grid-cols-3 gap-4">
+                <div><label>Name:</label> <input type="text" class="border p-2 w-full"></div>
+                <div><label>Title:</label> <input type="text" class="border p-2 w-full"></div>
+                <div><label>Program:</label> <input type="text" class="border p-2 w-full"></div>
+            </div>
+            <div class="mt-4"><label>Destination (City & State):</label> <input type="text" class="border p-2 w-full"></div>
+            <div class="mt-4"><label>Reason For Travel:</label> <input type="text" class="border p-2 w-full"></div>
+			<div class="mt-4 grid grid-cols-2 gap-4">
+                <div>
+                    <label>Date Departing:</label> 
+                    <input type="date" id="dateDeparting" class="border p-2 w-full" onchange="calculateAllMeals()">
+                    <label class="mt-2">Time Departing:</label> 
+                    <input type="time" class="border p-2 w-full">
+                </div>
+                <div>
+                    <label>Date Returning:</label> 
+                    <input type="date" id="dateReturning" class="border p-2 w-full" onchange="calculateAllMeals()">
+                    <label class="mt-2">Time Returning:</label> 
+                    <input type="time" class="border p-2 w-full">
+                </div>
+				<div id="instructionsModal" class="modal">
+					<div class="modal-content">
+						<h1 class="text-center font-bold text-xl mb-4">Instructions for Completing the Travel Authorization Form</h1>
+						<div class="container bordered p-8 bg-white rounded-lg shadow-lg">
+							<!-- Traveler Instructions -->
+							<h2 class="font-bold text-lg mt-4">Traveler Instructions</h2>
+							<p class="text-gray-700 mb-2">
+								Complete all applicable sections of this form and forward it to your supervisor for approval. Use the worksheets (green, blue, and yellow sections below) to calculate Mileage, Lodging, and Meal Per Diem, if applicable. Attach all supporting documents.
+							</p>
+
+							<!-- Supervisor Instructions -->
+							<h2 class="font-bold text-lg mt-4">Supervisor Instructions</h2>
+							<p class="text-gray-700 mb-2">
+								If approving the travel, attach this approved form with all signatures and attachments to Netsuite with requisition request.
+							</p>
+
+							<p class="text-gray-700 mb-2">
+								The completed form should be approved by the Supervisor and submitted to the Business Office 30 days prior to any travel arrangements being made.
+							</p>
+
+							<!-- SECTION 1 Instructions -->
+							<h2 class="font-bold text-lg mt-4">SECTION 1: Requested Travel Details</h2>
+							<ul class="list-disc ml-8">
+								<li><strong>Name, Title, & Program:</strong> Enter the traveler’s name, job title, and associated program.</li>
+								<li><strong>Destination (City & State):</strong> Specify the city and state of the travel destination.</li>
+								<li><strong>Date & Time:</strong> Enter the date and time of departure and return. Default times are 8:00 AM for departure and 5:00 PM for return.</li>
+								<li><strong>Business Purpose of Travel:</strong> Provide a brief description of the purpose for the travel.</li>
+								<li><strong>Meals Provided by Conference:</strong> List any meals provided by the conference. Note that these meals should be excluded from the daily meal per diem calculation.</li>
+							</ul>
+
+							<!-- SECTION 2 Instructions -->
+							<h2 class="font-bold text-lg mt-4">SECTION 2: Travel Expenses</h2>
+
+							<!-- Mileage Calculation -->
+							<h3 class="font-semibold mt-4">*Personal Vehicle/Mileage Calculation</h3>
+							<p class="text-gray-700 mb-2">
+								When calculating mileage, use Google Maps to calculate the distance from MCHD Main to and from the destination.
+							</p>
+
+							<!-- Lodging Calculation -->
+							<h3 class="font-semibold mt-4">**Lodging Calculation</h3>
+							<p class="text-gray-700 mb-2">
+								Enter the number of nights and the daily rate including taxes and fees. Refer to the GSA website (GSA.gov) for the maximum per night rate.
+							</p>
+
+							<!-- Meal Per Diem Calculation -->
+							<h3 class="font-semibold mt-4">***Meal Per Diem Calculation</h3>
+							<p class="text-gray-700 mb-2">
+								Using the <a href="https://www.gsa.gov/travel/plan-book/per-diem-rates" class="text-blue-500 underline">GSA Website Per Diem Rates</a>, complete the table below to calculate total meal expenses for each date of travel. Be sure to input "0" (zero) for meals provided as part of the conference in the daily meal per diem table.
+							</p>
+							<ul class="list-disc ml-8">
+								<li><strong>First and Last Day of Travel:</strong> Apply a 75% rate to the meal per diem for the first and last days of travel.</li>
+							</ul>
+
+							<!-- SECTION 3 Instructions -->
+							<h2 class="font-bold text-lg mt-4">SECTION 3: Travel Expense Summary</h2>
+							<p class="text-gray-700 mb-2">
+								Review the total travel expenses in this section. Include expenses for personal vehicle mileage, lodging, meal per diem, and any other relevant expenses. Make sure to verify the totals before submitting the form.
+							</p>
+
+							<!-- SECTION 4 Instructions -->
+							<h2 class="font-bold text-lg mt-4">SECTION 4: Cash Advance Total</h2>
+							<p class="text-gray-700 mb-2">
+								The cash advance request is available if expenses exceed $100. By submitting this form, you acknowledge financial responsibility for any cash advances received. If you are unable to attend the function, you must reimburse MCHD for any refundable amounts advanced for travel.
+							</p>
+						</div>
+						
+						
+						<div class="mt-8 flex justify-center">
+							<button onclick="closeModal()" class="bg-red-500 text-white py-2 px-4 rounded">Close</button>
+						</div>
+					</div>	
+				</div>
+			</div>
+		</div>
+
+        <!-- SECTION 2: TRAVEL EXPENSES -->
+        <h2 class="font-bold mt-4 text-lg">TRAVEL EXPENSES</h2>
+        <div class="flex mt-4">
+            <div class="w-1/2 p-4 bordered bg-yellow-50">
+                <h3 class="font-bold">Mileage Calculation</h3>
+                <p>Miles to be Traveled: <input type="number" id="miles" class="border w-full p-1" value="0" oninput="calculateMileage()"></p>
+                <p>Mileage Rate: <input type="number" id="mileageRate" class="border w-full p-1" value="0.67" oninput="calculateMileage()"></p>
+                <p>Total Mileage: <span id="personalMileage">0</span></p>
+            </div>
+            <div class="w-1/2 p-4 bordered bg-yellow-50">
+                <h3 class="font-bold">Lodging Calculation</h3>
+                <p>Number of Nights: <input type="number" id="nights" class="border w-full p-1" value="0" oninput="calculateLodging()"></p>
+                <p>Daily Rate: <input type="number" id="dailyRate" class="border w-full p-1" value="0" oninput="calculateLodging()"></p>
+                <p>Total Lodging: <span id="totalLodging">0</span></p>
+            </div>
+        </div>
+
+        <!-- MEAL PER DIEM CALCULATION -->
+        <div class="mt-4 bordered bg-yellow-50 p-4">
+            <h3 class="font-bold">Meal Per Diem Calculation</h3>
+            <div class="mt-4 flex space-x-2">
+				<button onclick="addDay()" class="bg-blue-500 text-white p-2 rounded">Add Day</button>
+				<button onclick="removeDay()" class="bg-blue-500 text-white p-2 rounded">Remove Day</button>
+			</div>
+            <table class="w-full mt-4" id="mealTable">
+				<thead>
+					<tr class="bg-gray-400">
+						<th class="bordered p-2">Dates of Travel</th>
+						<th class="bordered p-2">Breakfast</th>
+						<th class="bordered p-2">Lunch</th>
+						<th class="bordered p-2">Dinner</th>
+						<th class="bordered p-2">Incidentals</th>
+						<th class="bordered p-2">Total Per Day</th>
+					</tr>
+				</thead>
+				<tbody id="mealTableBody">
+					<tr class="bordered bg-gray-200">
+						<td class="bordered p-2"><input type="date" class="border p-2 w-full" onchange="calculateAllMeals()"></td>
+						<td class="bordered p-2"><input type="number" class="border p-2 w-full" value="0" oninput="calculateMealPerDiem(this.closest('tr'))"></td>
+						<td class="bordered p-2"><input type="number" class="border p-2 w-full" value="0" oninput="calculateMealPerDiem(this.closest('tr'))"></td>
+						<td class="bordered p-2"><input type="number" class="border p-2 w-full" value="0" oninput="calculateMealPerDiem(this.closest('tr'))"></td>
+						<td class="bordered p-2"><input type="number" class="border p-2 w-full" value="0" oninput="calculateMealPerDiem(this.closest('tr'))"></td>
+						<td class="bordered p-2 text-center"><span class="totalPerDay">0</span></td>
+					</tr>
+				</tbody>
+			</table>
+			<p class="mt-2 font-bold">Total Meal Per Diem: <span id="totalMealPerDiem">0</span></p>
+
+        </div>
+
+        <!-- TRAVEL EXPENSE SUMMARY -->
+<h2 class="font-bold mt-4 text-lg">TRAVEL EXPENSE SUMMARY</h2>
+<table class="w-full mt-2 bordered p-4 rounded-md bg-gray-200">
+    <thead>
+        <tr class="bg-gray-400">
+            <th class="bordered p-2">Type</th>
+            <th class="bordered p-2">Expense</th>
+            <th class="bordered p-2">Cash Advance Requested</th>
+            <th class="bordered p-2">Business Office to Make Arrangements</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="bordered p-2">Personal Vehicle/Mileage</td>
+            <td class="bordered p-2"><span id="expenseMileage">0</span></td>
+            <td class="bordered p-2"><input type="number" id="cashAdvanceMileage" class="border p-2 w-full" value="0" oninput="calculateTotalCashAdvance()"></td>
+            <td class="bordered p-2 text-center"><input type="checkbox" style="width: 20px; height: 20px;"></td>
+        </tr>
+        <tr>
+            <td class="bordered p-2">Rental Vehicle</td>
+            <td class="bordered p-2"><input type="number" id="rentalVehicle" class="border p-2 w-full" value="0" oninput="calculateTotalExpense()"></td>
+            <td class="bordered p-2"><input type="number" id="cashAdvanceRental" class="border p-2 w-full" value="0" oninput="calculateTotalCashAdvance()"></td>
+            <td class="bordered p-2 text-center"><input type="checkbox" style="width: 20px; height: 20px;"></td>
+        </tr>
+        <tr>
+            <td class="bordered p-2">Commercial Airfare/Flight</td>
+            <td class="bordered p-2"><input type="number" id="airfare" class="border p-2 w-full" value="0" oninput="calculateTotalExpense()"></td>
+            <td class="bordered p-2"><input type="number" id="cashAdvanceAirfare" class="border p-2 w-full" value="0" oninput="calculateTotalCashAdvance()"></td>
+            <td class="bordered p-2 text-center"><input type="checkbox" style="width: 20px; height: 20px;"></td>
+        </tr>
+        <tr>
+            <td class="bordered p-2">Registration Fees</td>
+            <td class="bordered p-2"><input type="number" id="registrationFee" class="border p-2 w-full" value="0" oninput="calculateTotalExpense()"></td>
+            <td class="bordered p-2"><input type="number" id="cashAdvanceRegistration" class="border p-2 w-full" value="0" oninput="calculateTotalCashAdvance()"></td>
+            <td class="bordered p-2 text-center"><input type="checkbox" style="width: 20px; height: 20px;"></td>
+        </tr>
+        <tr>
+            <td class="bordered p-2">Meal Per Diem</td>
+            <td class="bordered p-2"><span id="expenseMealPerDiem">0</span></td>
+            <td class="bordered p-2"><input type="number" id="cashAdvanceMealPerDiem" class="border p-2 w-full" value="0" oninput="calculateTotalCashAdvance()"></td>
+            <td class="bordered p-2 text-center"><input type="checkbox" style="width: 20px; height: 20px;"></td>
+        </tr>
+        <tr>
+            <td class="bordered p-2">Lodging</td>
+            <td class="bordered p-2"><span id="expenseLodging">0</span></td>
+            <td class="bordered p-2"><input type="number" id="cashAdvanceLodging" class="border p-2 w-full" value="0" oninput="calculateTotalCashAdvance()"></td>
+            <td class="bordered p-2 text-center"><input type="checkbox" style="width: 20px; height: 20px;"></td>
+        </tr>
+        <tr>
+            <td class="bordered p-2">Parking</td>
+            <td class="bordered p-2"><input type="number" id="parking" class="border p-2 w-full" value="0" oninput="calculateTotalExpense()"></td>
+            <td class="bordered p-2"><input type="number" id="cashAdvanceParking" class="border p-2 w-full" value="0" oninput="calculateTotalCashAdvance()"></td>
+            <td class="bordered p-2 text-center"><input type="checkbox" style="width: 20px; height: 20px;"></td>
+        </tr>
+        <tr>
+            <td class="bordered p-2">Other Transportation (i.e. taxi, subway)</td>
+            <td class="bordered p-2"><input type="number" id="otherTransportation" class="border p-2 w-full" value="0" oninput="calculateTotalExpense()"></td>
+            <td class="bordered p-2"><input type="number" id="cashAdvanceOtherTransportation" class="border p-2 w-full" value="0" oninput="calculateTotalCashAdvance()"></td>
+            <td class="bordered p-2 text-center"><input type="checkbox" style="width: 20px; height: 20px;"></td>
+        </tr>
+        <tr>
+            <td class="bordered p-2">Other Expenses</td>
+            <td class="bordered p-2"><input type="number" id="otherExpenses" class="border p-2 w-full" value="0" oninput="calculateTotalExpense()"></td>
+            <td class="bordered p-2"><input type="number" id="cashAdvanceOtherExpenses" class="border p-2 w-full" value="0" oninput="calculateTotalCashAdvance()"></td>
+            <td class="bordered p-2 text-center"><input type="checkbox" style="width: 20px; height: 20px;"></td>
+        </tr>
+        <!-- Total Row (Read-Only) -->
+        <tr>
+            <td class="bordered p-2 font-bold">TOTAL</td>
+            <td class="bordered p-2 font-bold"><span id="totalExpense">0</span></td>
+            <td class="bordered p-2 font-bold"><span id="totalCashAdvance">0</span></td>
+            <td class="bordered p-2"></td>
+        </tr>
+    </tbody>
+</table>
+
+		<div class="mt-8 p-4 bordered bg-gray-400 rounded">
+			<p class="mb-2">
+				By typing my name below, I understand and agree that this form of electronic signature has the same legal force and effect as a manual signature.
+			</p>
+			<div class="flex items-center space-x-4">
+				<label for="signatureName" class="font-bold">Name:</label>
+				<input type="text" id="signatureName" class="border p-2 w-full" placeholder="Type your name here" required maxlength="50" oninput="checkSignature()">
+
+				<label for="signatureDate" class="font-bold">Date:</label>
+				<input type="date" id="signatureDate" class="border p-2" required oninput="checkSignature()">
+			</div>
+		</div>
+		
+        <!-- Print Button (disabled by default) -->
+		<div class="mt-8 flex justify-end space-x-4">
+			<button id="printButton" onclick="triggerPrint()" class="text-white p-2 rounded" style="background-color: #009b22;" disabled>Print</button>
+		</div>
+	</div>
+
+    <script src="taf.js"></script>
+</body>
+</html>
