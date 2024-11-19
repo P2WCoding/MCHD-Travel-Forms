@@ -91,6 +91,7 @@ body {
     font-size: 1.25rem;
     margin-bottom: 1rem;
     color: #333; /* Darker text for emphasis */
+	text-align: center;
 }
 
 .print-instructions ul {
