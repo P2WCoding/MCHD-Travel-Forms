@@ -118,12 +118,12 @@ textarea {
 }
 
 .button-group .add-day {
-    background-color: #28a745;
+	background-color: #28a745;
     color: white;
 }
 
 .button-group .remove-day {
-    background-color: #dc3545;
+	background-color: #dc3545;
     color: white;
 }
 
