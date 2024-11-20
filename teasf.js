@@ -101,3 +101,13 @@ function printForm() {
 		function closeModal() {
 			document.getElementById("instructionsModal").style.display = "none";
 		}
+		
+		document.addEventListener("DOMContentLoaded", function() {
+			const links = document.querySelectorAll(".navbar a");
+			links.forEach(link => {
+				if (link.href === window.location.href) {
+					link.style.fontWeight = "bold";
+					link.style.textDecoration = "underline";
+				}
+			});
+		});

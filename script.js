@@ -28,3 +28,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("instructionsModal");
+    const openButton = document.getElementById("openModal");
+    const closeButton = document.getElementById("closeModal");
+
+    openButton.addEventListener("click", () => {
+        modal.style.display = "block";
+    });
+
+    closeButton.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+
+    window.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const links = document.querySelectorAll(".navbar a");
+    links.forEach(link => {
+        if (link.href === window.location.href) {
+            link.style.fontWeight = "bold";
+            link.style.textDecoration = "underline";
+        }
+    });
+});
+
+function closeModal() {
+	document.getElementById("instructionsModal").style.display = "none";
+}

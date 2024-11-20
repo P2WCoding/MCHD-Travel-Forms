@@ -8,47 +8,53 @@
     <script src="script.js" defer></script>
 </head>
 <body class="p-8">
+    <div class="navbar">
+		<a href="index.html" class="navbar-home">
+			<img src="assets/images/home-icon.png" alt="Home" class="home-icon">
+		</a>
+	</div>
 
     <div class="form-container">
         <h1 class="section-header">Welcome! Please select the appropriate form for your needs:</h1>
         
-        <div class="instructions">
-            <ul>
-                <li class="li"><b>Travel Authorization Form:</b> Use this form to request approval for work-related travel.</li>
-                <li class="li"><b>Travel Expense Settlement Form:</b> Complete this form to report expenses and request reimbursements after approved travel.</li>
-            </ul>
-           <p>If you need assistance completing these forms, contact the <a href="https://mail.google.com/mail/?view=cm&fs=1&to=devan.t.smith@wv.gov" target="_blank">Business Office</a>.</p>
-        </div>
-		
-		<div class="print-instructions">
-			<h2>Using the Print Button</h2>
-			<p>
-				Each form includes a print button that allows you to save or print a copy for record-keeping or submission. 
-				Follow these steps:
-			</p>
-			<ul>
-				<li>After filling out the form, click the <b>Print</b> button located at the bottom of the page.</li>
-				<li>
-					In the print dialog that appears, select <b>Save as PDF</b> from the printer options if you want to save a digital copy instead of printing it.
-				</li>
-				<li>
-					To ensure the form fits neatly on one page, use the <b>Custom Scaling</b> option:
+			<div class="instructions">
+				<ul>
+					<li class="li"><b>Travel Authorization Form:</b> Use this form to request approval for work-related travel.</li>
+					<li class="li"><b>Travel Expense Settlement Form:</b> Complete this form to report expenses and request reimbursements after approved travel.</li>
+				</ul>
+			   <p>If you need assistance completing these forms, contact the <a href="https://mail.google.com/mail/?view=cm&fs=1&to=devan.t.smith@wv.gov" target="_blank">Business Office</a>.</p>
+			</div>
+
+			<!-- Modal -->
+			<div id="instructionsModal" class="modal">
+				<div class="modal-content">
+					<h2>Using the Print Button</h2>
+					<p>Each form includes a print button that allows you to save or print a copy for record-keeping or submission. Follow these steps:</p>
 					<ul>
-						<li>Find the scaling or page size settings in the print dialog (usually under "More Settings").</li>
-						<li>Adjust the scaling percentage to shrink or expand the form to fit within the page margins.</li>
-						<li>Preview the form to ensure everything is properly aligned.</li>
+						<li>After filling out the form, click the <b>Print</b> button located at the bottom of the page.</li>
+						<li>In the print dialog that appears, select <b>Save as PDF</b> from the printer options if you want to save a digital copy instead of printing it.</li>
+						<li>To ensure the form fits neatly on one page, use the <b>Custom Scaling</b> option:
+							<ul>
+								<li>Find the scaling or page size settings in the print dialog (usually under "More Settings").</li>
+								<li>Adjust the scaling percentage to shrink or expand the form to fit within the page margins.</li>
+								<li>Preview the form to ensure everything is properly aligned.</li>
+							</ul>
+						</li>
+						<li>Once satisfied, click <b>Print</b> or <b>Save</b> to finalize the process.</li>
 					</ul>
-				</li>
-				<li>Once satisfied, click <b>Print</b> or <b>Save</b> to finalize the process.</li>
-			</ul>
-			</p>
-		</div
+					<div class="mt-8 flex justify-center">
+						<button onclick="closeModal()" class="custom-button">Close</button>
+					</div>
 
-        <div class="button-group">
-            <button onclick="navigateToForm('taf.html')" class="button button-primary">Travel Authorization Form</button>
-            <button onclick="navigateToForm('teasf.html')" class="button button-secondary">Expense Settlement Form</button>
-        </div>
-    </div>
+				</div>
+			</div>
 
+				
+			<div class="button-group">
+				<button onclick="navigateToForm('taf.html')" class="button button-primary">Travel Authorization Form</button>
+				<button id="openModal" class="button button-print">How To Submit A Form</button>
+				<button onclick="navigateToForm('teasf.html')" class="button button-secondary">Expense Settlement Form</button>
+			</div>
+		</div>
 </body>
 </html>

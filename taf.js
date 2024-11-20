@@ -144,3 +144,13 @@ function addDay() {
 		window.onload = function() {
 			checkSignature(); // Call to set the initial state of the print button
 		};
+		
+		document.addEventListener("DOMContentLoaded", function() {
+			const links = document.querySelectorAll(".navbar a");
+			links.forEach(link => {
+				if (link.href === window.location.href) {
+					link.style.fontWeight = "bold";
+					link.style.textDecoration = "underline";
+				}
+			});
+		});

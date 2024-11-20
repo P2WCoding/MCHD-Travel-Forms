@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MCHD Travel Authorization Form</title>
+	<link rel="stylesheet" href="taf.css">
+	<script src="taf.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .bordered { border: 1px solid black; }
@@ -35,10 +37,15 @@
     </style>
 </head>
 <body class="p-8" style="background-color: #009b22;">
+	<div class="navbar">
+		<a href="index.html" class="navbar-home">
+			<img src="assets/images/home-icon.png" alt="Home" class="home-icon">
+		</a>
+	</div>
 
-    <div class="bordered p-8 bg-sky-100 rounded-lg shadow-lg relative">
+    <div class="bordered p-8 bg-sky-100 rounded-lg shadow-lg relative" style="padding-top: 100px;">
         <!-- Instructions Button to trigger modal -->
-        <button onclick="showModal()" class="bg-blue-500 text-white py-2 px-4 rounded absolute-top-right">
+        <button onclick="showModal()" class="text-white py-2 px-4 rounded absolute-top-right" style="margin-top: 100px; background-color: #0000FF;">
             Instructions
         </button>
 
