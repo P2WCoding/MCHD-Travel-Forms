@@ -160,7 +160,7 @@ body {
 
 /* Navigation Bar Styling */
 .navbar {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -168,17 +168,31 @@ body {
     background-color: #38b052;
     color: white;
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: center; /* Center the content */
-    padding: 0 1.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+    padding: 0;
+    margin: 0;
 }
 
 .navbar-home {
     display: flex;
+    justify-content: center;
     align-items: center;
-	justify-content: center;
+}
+
+.navbar {
+    border: 2px solid red;
+}
+.navbar-home {
+    border: 2px solid blue;
+}
+.home-icon {
+    border: 2px solid green;
+}
+
+.navbar {
+    justify-content: center !important;
+    align-items: center !important;
 }
 
 .home-icon {
