@@ -1,0 +1,224 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #009c25;
+    margin: 0;
+    padding: 2rem; /* Consistent padding */
+}
+
+/* Form Container */
+.form-container {
+    max-width: 1000px;
+	max-height: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #d9eaf7; /* Light blue for the container */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center align text inside the container */
+}
+
+/* Section Header */
+.section-header {
+    background-color:  #f4f6f9; /* Light gray background */
+    padding: 1rem;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 5px;
+}
+
+/* Instructions Section */
+.instructions {
+    padding: 1rem;
+    background-color: #d6eaf8; /* Slightly darker blue for contrast */
+    border-radius: 5px;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.li, .ul {
+	text-align: left;
+}
+
+/* Button Group */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem; /* Spacing between buttons */
+}
+
+/* Buttons */
+.button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.button-primary {
+    background-color: #009b22; /* Green button */
+}
+
+.button-secondary {
+    background-color: #009b22; /* Green button */
+}
+
+.button-print {
+	background-color: #009b22; /* Green button */
+}
+
+.button:hover {
+    opacity: 0.9; /* Slight transparency effect on hover */
+}
+
+.print-instructions button {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	background-color: #009b22; /* Green button */
+}
+
+/* Print Instructions Section */
+.print-instructions {
+    margin-top: 2rem;
+	margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: #f4f6f9; /* Light gray background */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.print-instructions h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: #333; /* Darker text for emphasis */
+	text-align: center;
+}
+
+.print-instructions ul {
+    padding-left: 1.5rem;
+    list-style-type: disc;
+}
+
+.print-instructions ul ul {
+    list-style-type: circle; /* Sub-list styling */
+    margin-top: 0.5rem;
+}
+
+.print-instructions li {
+    margin-bottom: 0.5rem;
+}
+
+.print-instructions a {
+    color: #007bff; /* Link color matching the buttons */
+    text-decoration: underline;
+}
+
+.print-instructions a:hover {
+    color: #0056b3; /* Darker hover color */
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 800;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    margin: 15% auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 1000px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: left;
+}
+
+.modal-content h2 {
+	text-align: center;
+}
+
+/* Navigation Bar Styling */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background-color: #38b052;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar-home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar {
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.home-icon {
+    width: 36px; /* Slightly increased size for better visibility */
+    height: 36px;
+}
+
+/* Adjust spacing for navbar */
+body {
+    padding-top: 80px; /* Accommodate fixed navbar height */
+}
+
+.custom-button {
+    background-color: #ef4444; /* Matches bg-red-500 in Tailwind */
+    color: #ffffff; /* Matches text-white in Tailwind */
+    padding-top: 0.5rem; /* Matches py-2 in Tailwind */
+    padding-bottom: 0.5rem; /* Matches py-2 in Tailwind */
+    padding-left: 1rem; /* Matches px-4 in Tailwind */
+    padding-right: 1rem; /* Matches px-4 in Tailwind */
+    border-radius: 0.25rem; /* Matches rounded in Tailwind */
+    border: none; /* Remove any border */
+    cursor: pointer; /* Ensure pointer cursor on hover */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add some shadow for better visibility */
+    transition: background-color 0.3s ease, opacity 0.3s ease; /* Add a smooth transition */
+	justify-content: center;
+	display: flex;
+	text-align: center;
+}
+
+.custom-button:hover {
+    opacity: 0.9; /* Slight transparency effect on hover */
+}
+
+.logo {
+	display: flex;
+	justify-content: center;
+	padding-top: 80px;
+}
+
