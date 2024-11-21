@@ -181,16 +181,6 @@ body {
 }
 
 .navbar {
-    border: 2px solid red;
-}
-.navbar-home {
-    border: 2px solid blue;
-}
-.home-icon {
-    border: 2px solid green;
-}
-
-.navbar {
     justify-content: center !important;
     align-items: center !important;
 }
