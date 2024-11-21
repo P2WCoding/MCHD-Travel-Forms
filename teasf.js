@@ -1,4 +1,4 @@
-function printForm() {
+		function printForm() {
 					const signature = document.querySelector('input[type="text"][required]').value;
 					const signatureDate = document.querySelector('input[type="date"][required]').value;
 					if (signature && signatureDate) {
